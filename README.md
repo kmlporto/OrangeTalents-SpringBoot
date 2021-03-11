@@ -41,3 +41,9 @@
   * dessa forma criamos uma classe e anotamos com @RestControllerAdvice - componente especializado em tratar exceções;
   * o tipo de exceção que queremos tratar é a MethodArgumentNotValidException, que é a exceção lançada quando alguma validação de um argumento anotado com @Valid falha;
   * então no método que irá tratar a exceção precisamos indicar isso através de @ExceptionHandler e para manter o status como BadRequest, usamos o @ResponseStatus(code=HttpStatus.BAD_REQUEST);
+  
+### Módulo 6 - Métodos PUT, DELETE e tratamento de erros
+* primeiro método a ser criado deve ser o consultar, outro GET, então usamos @GetMapping("/{id}"), para distinguir do outro get que já existe e para receber via uri o id do tópico que queremos consultar;
+  * a forma de resgatar esse id passado via uri é usando @PathVariable;
+* o put é um verbo bastante usado para alteração de dados, porém não existe apenas este. Existe também o PATCH;
+* o delete é um verbo usado para remover um registro do banco;
