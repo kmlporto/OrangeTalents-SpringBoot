@@ -32,3 +32,12 @@
   * dessa forma precisamos alterar o retorno da requisição, pois o status default é OK - 200;
   * uma forma de fazer isso é através do objeto ResponseEntity;
   
+### Módulo 5 - Validação com Bean Validation
+* para usar o validation é necessário adicionar este módulo no arquivo pom.xml;
+  * artifacId = spring-boot-starter-validation;
+* então podemos fazer uso de algumas anotações para validar os dados, como por exemplo @NotNull, @NotEmpty, @Size;
+  * para essas validações refletirem no dto passado por parâmetro da requisição, é necessário usar o @Valid;
+* quando uma requisição não é válida, a resposta devolvida para o cliente é bem extensa, então podemos fazer um tratamento dos campos que possuem erro;
+  * dessa forma criamos uma classe e anotamos com @RestControllerAdvice - componente especializado em tratar exceções;
+  * o tipo de exceção que queremos tratar é a MethodArgumentNotValidException, que é a exceção lançada quando alguma validação de um argumento anotado com @Valid falha;
+  * então no método que irá tratar a exceção precisamos indicar isso através de @ExceptionHandler e para manter o status como BadRequest, usamos o @ResponseStatus(code=HttpStatus.BAD_REQUEST);

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -40,7 +41,7 @@ public class TopicosController {
     }
 
     @PostMapping
-    public ResponseEntity<TopicoResponse> cadastra(@RequestBody TopicoPersist topicoPersist){
+    public ResponseEntity<TopicoResponse> cadastra(@RequestBody @Valid TopicoPersist topicoPersist){
         Topico topico = topicoRepository.save(topicoPersist.converter(cursoRepository));
         TopicoResponse topicoResponse = TopicoResponse.converter(topico);
         return new ResponseEntity<>(topicoResponse, HttpStatus.CREATED);

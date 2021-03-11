@@ -3,10 +3,22 @@ package br.com.alura.forum.controller.dto.persist;
 import br.com.alura.forum.modelo.Curso;
 import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.repository.CursoRepository;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class TopicoPersist {
+    @NotEmpty
+    @NotNull
+    @Length(min = 5)
     private String titulo;
+    @NotEmpty
+    @NotNull
+    @Length(min = 10)
     private String mensagem;
+    @NotEmpty
+    @NotNull
     private String nomeCurso;
 
     public String getTitulo() {
