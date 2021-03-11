@@ -11,3 +11,14 @@
 * para facilitar nossa vida podemos adicionar o módulo do Spring Boot, o DevTools, uma dos benefícios ao usá-lo é não precisar ficar reiniciando a aplicação toda vez que é feita uma alteração no código;
 * Data Transfer Object(DTO) - Objetos usados para transferência de dados, muito útil quando não queremos exibir todos os dados de uma entidade, ou quando queremos exibir dados a mais;
 * agora sempre que vamos devolver ou receber dados para o usuário vamos fazer usos de dto's;
+
+### Módulo 3 - Usando Spring Data
+* para usar spring data precisamos realizar alguns passos:
+  * adicionar a dependência no pom.xml, depois configurar o datasource, jpa e o banco que vamos utilizar no arquivo application.yml;
+  * transformar as classes de domínio em entidades reconhecidas pelo jpa; 
+  * criar repositórios para assim conseguir acessar dados mais fácil que usando EntityManager;
+* podemos criar um arquivo para população de dados no banco, chamado data.sql;
+* para criar um repositório devemos criar uma interface, que herda da interface JPARepository do Spring Data JPA;
+* existem formas de gerar consultas nos repositórios:
+  * usando padrão spring data - deve seguir o padrão de nomenclatura do framework;
+  * usando jpql - deve fazer uso da anotação @Query e @Param para passar os parâmetros;
