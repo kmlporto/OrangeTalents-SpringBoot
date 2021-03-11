@@ -22,3 +22,13 @@
 * existem formas de gerar consultas nos repositórios:
   * usando padrão spring data - deve seguir o padrão de nomenclatura do framework;
   * usando jpql - deve fazer uso da anotação @Query e @Param para passar os parâmetros;
+
+### Módulo 4 - Trabalhando com POST
+* agora que tem dois tipos de verbo para a rota de tópicos, vamos usar:
+  * usar o @RequestMapping na classe de controller;
+  * usar o @PostMapping e @GetMapping nos métodos;
+* para receber parâmetros enviados via body de uma requisição post, precisamos usar a anotação @RequestBody;
+* quando criamos um objeto no banco de dados é interessante que o retorno da requisição seja o status CREATED * 201;
+  * dessa forma precisamos alterar o retorno da requisição, pois o status default é OK - 200;
+  * uma forma de fazer isso é através do objeto ResponseEntity;
+  

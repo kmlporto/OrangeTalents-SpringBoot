@@ -1,4 +1,4 @@
-package br.com.alura.forum.controller.dto;
+package br.com.alura.forum.controller.dto.response;
 
 import br.com.alura.forum.modelo.Topico;
 
@@ -6,21 +6,25 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TopicoDto {
+public class TopicoResponse {
     private Long id;
     private String titulo;
     private String mensagem;
     private LocalDateTime dataCricao;
 
-    public TopicoDto(Topico topico) {
+    public TopicoResponse(Topico topico) {
         id = topico.getId();
         titulo = topico.getTitulo();
         mensagem = topico.getMensagem();
         dataCricao = topico.getDataCriacao();
     }
 
-    public static List<TopicoDto> converter(List<Topico> topicos){
-        return topicos.stream().map(TopicoDto::new).collect(Collectors.toList());
+    public static List<TopicoResponse> converter(List<Topico> topicos){
+        return topicos.stream().map(TopicoResponse::new).collect(Collectors.toList());
+    }
+
+    public static TopicoResponse converter(Topico topico){
+        return new TopicoResponse(topico);
     }
 
     public Long getId() {
