@@ -65,3 +65,18 @@
 * para habilitar o cache precisamos também utilizar @EnableCaching na classe de aplicação;
 * nos métodos que altera nossos dados de alguma forma, seja excluindo ou alterando, é necessário colocar @CacheEvict, passando qual o cache que devo invalidar, senão fica dados inconsistentes na listagem;
 * cache deve ser usado em tabelas que raramente são atualizadas, pois também temos um custo para gerencia-los;
+
+### Módulo 3 - Proteção com Srping Security
+* para restringir quem poderá consumir os endpoints vamos fazer uso de autenticação;
+* então adicionamos no pom o módulo do sprint boot de segurança: o spring-boot-starter-security;
+* para habilitar e configurar o controle de autenticação e autorização do projeto, devemos criar uma classe para e anotar o @Configuration e @EnableWebSecurity, e então adicionamos a herança da classe abstrata WebSecurityConfigurerAdapter para poder sobrescrever alguns destes métodos;
+* existem três métodos configure() que podemos sobrescrever, uma delas é para configuração de arquivos estáticos, outra para autorizações, e outra para autenticação;
+* para liberar acesso a algum endpoint da nossa api, devemos chamar o método http.authorizeRequests().antMatchers().permitAll() dentro do método configure(HttpSecurity http) que está na classe
+* o método anyRequest().authenticated() indica ao Spring Security para bloquear todos os endpoints que não foram liberados anteriormente com o método permitAll();
+* para implementar o controle de autenticação na api, devemos implementar a interface UserDetails na classe de Usuario e também implementar a interface GrantedAuthority na classe Perfil;
+  * na classe Usuario devemos adicionar o atributo List<Perfil> com relacionamento ManyToMany;
+* para o spring security gerar automaticamente um formulário de login, devemos chamar o método and().formLogin(), dentro do método configure(HttpSecurity http), que está na classe SecurityConfigurations;
+* devemos criar uma classe de serviço responsável por autenticar o usuário, nela devemos implementar a interface UserDetailsService e então sobrescrever o método loadUserByUsername;
+  * nesse método devemos acessar o repositório de usuário para resgata-lo;
+* UserDetailsService - indica ao Spring Security que essa é a classe service que executa a lógica de autenticação;
+* devemos indicar ao spring security qual o algoritmo de hashing de senha que utilizaremos na api, chamando o método passwordEncoder(), dentro do método configure(AuthenticationManagerBuilder auth), que está na classe de configurações de autenticação e autorização;
