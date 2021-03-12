@@ -7,12 +7,16 @@ import br.com.alura.forum.controller.dto.update.TopicoUpdate;
 import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -29,12 +33,14 @@ public class TopicosController {
     }
 
     @GetMapping
-    public List<TopicoResponse> lista(String nomeCurso){
-        List<Topico> topicos;
+    public Page<TopicoResponse> lista(
+            @RequestParam(required = false) String nomeCurso,
+            @PageableDefault(size = 20) Pageable pageable){
+        Page<Topico> topicos;
         if(nomeCurso == null){
-            topicos = topicoRepository.findAll();
+            topicos = topicoRepository.findAll(pageable);
         }else{
-            topicos = topicoRepository.findAllByCursoNome(nomeCurso);
+            topicos = topicoRepository.findAllByCursoNome(nomeCurso, pageable);
         }
         return TopicoResponse.converter(topicos);
     }

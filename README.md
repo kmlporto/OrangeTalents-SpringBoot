@@ -47,3 +47,13 @@
   * a forma de resgatar esse id passado via uri é usando @PathVariable;
 * o put é um verbo bastante usado para alteração de dados, porém não existe apenas este. Existe também o PATCH;
 * o delete é um verbo usado para remover um registro do banco;
+
+# OrangeTalents-SpringBoot - Segurança da API, Cache e Monitoramento
+
+### Módulo 1 - Paginação e ordenação de recursos
+* quando o devolvemos uma lista de todos os elementos existentes no banco pode causar problemas quando existir muitos dados cadastrados;
+* a forma de resolver esse problema é usando a paginação, onde escolhemos quantos elementos vamos devolver por vez e qual página queremos pegar;
+* além de devolver os dados pela página, é devolvido o total de páginas, total de elementos, entre outras informações;
+* é possível também, ordenar os dados de acordo com um de seus atributos;
+* para nos ajudar com a paginação usamos o objeto Page e interface Pageable;
+* através do @PageableDefault podemos deixar uma configuração de paginação default, para quando não for passado nada na requisição;
