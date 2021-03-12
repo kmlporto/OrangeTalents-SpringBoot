@@ -57,3 +57,11 @@
 * é possível também, ordenar os dados de acordo com um de seus atributos;
 * para nos ajudar com a paginação usamos o objeto Page e interface Pageable;
 * através do @PageableDefault podemos deixar uma configuração de paginação default, para quando não for passado nada na requisição;
+
+### Módulo 2 - Melhorando desempenho com Spring Cache
+* para melhorar a performance da aplicação podemos fazer uso de caches;
+* adicionar no pom o módulo do spring boot de cache: o spring-boot-starter-cache;
+* caso nossa api fosse para produção seria necessário utilizar uma ferramenta/provedor de cache, como exemplo o redis, mas como estamos apenas estudando não vamos fazer isso. Dessa forma utilizaremos o cache em memória que é utilizado pelo spring quando não configuramos nenhum;
+* para habilitar o cache precisamos também utilizar @EnableCaching na classe de aplicação;
+* nos métodos que altera nossos dados de alguma forma, seja excluindo ou alterando, é necessário colocar @CacheEvict, passando qual o cache que devo invalidar, senão fica dados inconsistentes na listagem;
+* cache deve ser usado em tabelas que raramente são atualizadas, pois também temos um custo para gerencia-los;

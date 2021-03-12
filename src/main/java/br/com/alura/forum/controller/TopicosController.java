@@ -7,6 +7,8 @@ import br.com.alura.forum.controller.dto.update.TopicoUpdate;
 import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +35,7 @@ public class TopicosController {
     }
 
     @GetMapping
+    @Cacheable(value = "listaTopicos")
     public Page<TopicoResponse> lista(
             @RequestParam(required = false) String nomeCurso,
             @PageableDefault(size = 20) Pageable pageable){
@@ -55,6 +58,7 @@ public class TopicosController {
     }
 
     @PostMapping
+    @CacheEvict(value = "listaTopicos", allEntries = true)
     public ResponseEntity<TopicoResponse> cadastra(@RequestBody @Valid TopicoPersist topicoPersist){
         Topico topico = topicoRepository.save(topicoPersist.converter(cursoRepository));
         TopicoResponse topicoResponse = TopicoResponse.converter(topico);
@@ -62,6 +66,7 @@ public class TopicosController {
     }
 
     @PutMapping("/{id}")
+    @CacheEvict(value = "listaTopicos", allEntries = true)
     public ResponseEntity<TopicoResponse> atualiza(@PathVariable Long id, @RequestBody @Valid TopicoUpdate topicoUpdate){
         Optional<Topico> optional = topicoRepository.findById(id);
         if(optional.isPresent()){
@@ -73,6 +78,7 @@ public class TopicosController {
     }
 
     @DeleteMapping("/{id}")
+    @CacheEvict(value = "listaTopicos", allEntries = true)
     public ResponseEntity<?> deleta(@PathVariable Long id){
         Optional<Topico> optional = topicoRepository.findById(id);
         if(optional.isPresent()){
