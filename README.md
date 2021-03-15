@@ -99,3 +99,13 @@
   * para registrar o filtro é necessário adicionar na classe SecurityConfigurations a linha addFilterBefore(new AutenticacaoViaTokenFilter(), UsernamePasswordAuthenticationFilter.class);
   * para validar o token precisamos ter acesso à classe TokenService, então precisamos injetar essa dependência, porém, não é possível via autowired pois a injeção desta classe AutenticacaoViaTokenFilter foi feita manualmente por nós via construtor, então será necessário usar o construtor para injetar outras classes na mesma;
   * após validar o token é necessário validar o cliente via SecurityContextHolder;
+  
+### Módulo 6 - Monitoramento com Srping Boot Actuator
+* para adicionar o Spring Boot Actuator no projeto, devemos adicioná-lo como uma dependência no arquivo pom.xml;
+* para acessar as informações disponibilizadas pelo Actuator, devemos entrar no endereço http://localhost:8080/actuator;
+* para liberar acesso ao Actuator no Spring Security, devemos chamar o método .antMatchers(HttpMethod.GET, "/actuator/**");
+* para que o Actuator exponha mais informações sobre a API, devemos adicionar as propriedades management.endpoint.health.show-details=always e management.endpoints.web.exposure.include=* no arquivo application.properties;
+* para utilizar o Spring Boot Admin, devemos criar um projeto Spring Boot e adicionar nele os módulos spring-boot-starter-web e spring-boot-admin-server;
+* para trocar a porta na qual o servidor do Spring Boot Admin rodará, devemos adicionar a propriedade server.port=8081 no arquivo application.properties;
+* para o Spring Boot Admin conseguir monitorar a nossa API, devemos adicionar no projeto da API o módulo spring-boot-admin-client e também adicionar a propriedade spring.boot.admin.client.url=http://localhost:8081 no arquivo application.properties;
+* para acessar a interface gráfica do Spring Boot Admin, devemos entrar no endereço http://localhost:8081;
