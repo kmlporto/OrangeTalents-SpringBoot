@@ -80,3 +80,15 @@
   * nesse método devemos acessar o repositório de usuário para resgata-lo;
 * UserDetailsService - indica ao Spring Security que essa é a classe service que executa a lógica de autenticação;
 * devemos indicar ao spring security qual o algoritmo de hashing de senha que utilizaremos na api, chamando o método passwordEncoder(), dentro do método configure(AuthenticationManagerBuilder auth), que está na classe de configurações de autenticação e autorização;
+
+### Módulo 4 - Gerando token com JWT
+* a autenticação via login não é uma boa prática para api rest, pois não é stateless;
+* então vamos realizar a autenticação via tokens, existe uma biblioteca java que segue o modelo do JSON web token, chamada jjwt;
+* para indicar que não vamos mais usar a autenticação via formulário, removemos a linha and().formLogin() e para configurar autenticação stateless adicionamos na classe de configuração de segurança sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+* desabilitamos também a validação csrf (cross-site request forgery): .and().csrf().disable();
+* é necessário criar uma classe que cuide da autenticação AutenticacaoController que será um controller e terá a rota "/auth";
+  * criamos um método autenticar(), que receberá uma requisição do tipo Post, nesse método recebemos um objeto LoginForm, que terá dados de senha e email do usuário;
+  * esse método irá chamar o método authenticate para uma instância da classe AuthenticationManager;
+* para injetar o AuthenticationManager no controller, devemos criar um método anotado com @Bean, na classe SecurityConfigutarions, que retorna uma chamada ao método super.athenticationManager();
+* para criar o token JWT devemos utilizar a classe Jwts;
+* ao criar o token foi enviado juntamente outra informação chamada Bearer, que é um dos mecanismos de autenticação utilizados no protocolo HTTP, tal como o Basic e o Digest;
