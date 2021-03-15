@@ -109,3 +109,12 @@
 * para trocar a porta na qual o servidor do Spring Boot Admin rodará, devemos adicionar a propriedade server.port=8081 no arquivo application.properties;
 * para o Spring Boot Admin conseguir monitorar a nossa API, devemos adicionar no projeto da API o módulo spring-boot-admin-client e também adicionar a propriedade spring.boot.admin.client.url=http://localhost:8081 no arquivo application.properties;
 * para acessar a interface gráfica do Spring Boot Admin, devemos entrar no endereço http://localhost:8081;
+
+### Módulo 7 - Documentação da API com Swagger
+* para documentar a nossa API Rest, podemos utilizar o Swagger, com o módulo SpringFox Swagger;
+* para utilizar o SpringFox Swagger na API, devemos adicionar suas dependências no arquivo pom.xml;
+* para habilitar o Swagger na API, devemos adicionar a anotação @EnableSwagger2 na classe ForumApplication;
+* as configurações do Swagger devem ser feitas criando-se uma classe chamada SwaggerConfigurations e adicionando nela a anotação @Configuration;
+* para configurar quais endpoints e pacotes da API o Swagger deve gerar a documentação, devemos criar um método anotado com @Bean, que devolve um objeto do tipo Docket;
+* para acessar a documentação da API, devemos entrar no endereço http://localhost:8080/swagger-ui.html;
+* para liberar acesso ao Swagger no Spring Security, devemos chamar o seguinte método web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**"), dentro do método void configure(WebSecurity web), que está na classe SecurityConfigurations.
