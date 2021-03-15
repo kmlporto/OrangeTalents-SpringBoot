@@ -124,3 +124,8 @@
 ### Módulo 1 - Mais segurança
 * é possível restringir o acesso a determinados endpoints da aplicação, de acordo com o perfil do usuário autenticado, utilizando o método hasRole(“NOME_DO_ROLE”) nas configurações de segurança da aplicação.
 
+### Módulo 2 - Profiles
+* profiles devem ser utilizados para separar as configurações de cada tipo de ambiente, tais como desenvolvimento, testes e produção;
+* existe a anotação @Profile serve para indicar ao Spring que determinada classe deve ser carregada apenas quando determinados profiles estiverem ativos;
+* é possível configurar o profile ativo da aplicação por meio do arquivo application.yml spring.profiles.active: dev;
+
