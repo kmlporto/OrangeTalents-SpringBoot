@@ -118,3 +118,9 @@
 * para configurar quais endpoints e pacotes da API o Swagger deve gerar a documentação, devemos criar um método anotado com @Bean, que devolve um objeto do tipo Docket;
 * para acessar a documentação da API, devemos entrar no endereço http://localhost:8080/swagger-ui.html;
 * para liberar acesso ao Swagger no Spring Security, devemos chamar o seguinte método web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**"), dentro do método void configure(WebSecurity web), que está na classe SecurityConfigurations.
+
+# OrangeTalents-SpringBoot - Profile, Testes e Deploy
+
+### Módulo 1 - Mais segurança
+* é possível restringir o acesso a determinados endpoints da aplicação, de acordo com o perfil do usuário autenticado, utilizando o método hasRole(“NOME_DO_ROLE”) nas configurações de segurança da aplicação.
+
