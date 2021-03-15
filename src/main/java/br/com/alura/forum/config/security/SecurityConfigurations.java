@@ -1,5 +1,6 @@
 package br.com.alura.forum.config.security;
 
+import br.com.alura.forum.repository.UsuarioRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 @Configuration
@@ -18,14 +20,20 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
     private final AutenticacaoService autenticaService;
 
+    private final TokenService tokenService;
+
+    private final UsuarioRepository usuarioRepository;
+
     @Override
     @Bean
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
 
-    public SecurityConfigurations(AutenticacaoService autenticaService) {
+    public SecurityConfigurations(AutenticacaoService autenticaService, TokenService tokenService, UsuarioRepository usuarioRepository) {
         this.autenticaService = autenticaService;
+        this.tokenService = tokenService;
+        this.usuarioRepository = usuarioRepository;
     }
 
     // Configurações de autenticação
@@ -42,7 +50,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
     }
 
     // Configurações de arquivos estáticos

@@ -92,3 +92,10 @@
 * para injetar o AuthenticationManager no controller, devemos criar um método anotado com @Bean, na classe SecurityConfigutarions, que retorna uma chamada ao método super.athenticationManager();
 * para criar o token JWT devemos utilizar a classe Jwts;
 * ao criar o token foi enviado juntamente outra informação chamada Bearer, que é um dos mecanismos de autenticação utilizados no protocolo HTTP, tal como o Basic e o Digest;
+
+### Módulo 5 - Autenticação via JWT
+* para ser realizado uma autenticação as requisições dos endpoints criados na api é necessário adicionar um filtro, para que passe por o trecho do código que autentique, antes de executar tudo o que é feito em cada método do endpoint;
+  * então criamos uma classe  AutenticacaoViaTokenFilter que vai herdar da classe abstrata OncePerRequestFilter, e então sobrescrevemos o método doFilterInternal(), dai conseguimos acessar a requisição e então recuperar o token passado;
+  * para registrar o filtro é necessário adicionar na classe SecurityConfigurations a linha addFilterBefore(new AutenticacaoViaTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+  * para validar o token precisamos ter acesso à classe TokenService, então precisamos injetar essa dependência, porém, não é possível via autowired pois a injeção desta classe AutenticacaoViaTokenFilter foi feita manualmente por nós via construtor, então será necessário usar o construtor para injetar outras classes na mesma;
+  * após validar o token é necessário validar o cliente via SecurityContextHolder;
