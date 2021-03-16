@@ -145,3 +145,10 @@
   * comando: java -jar forum-0.0.1-SNAPSHOT.jar
 * é possível passar parâmetros para as configurações da aplicação via variáveis de ambiente;
 * é possível alterar o build para criar um arquivo .wat, para deploy em servidores de aplicações;
+
+### Módulo 5 - Deploy com Docker e na nuvem
+* é possível utilizar o Docker para criação de imagens e de containers para aplicações que utilizam Java com Spring Boot.
+* devemos criar um arquivo Dockerfile no diretório raiz da aplicação, para ensinar ao Docker como deve ser gerada a imagem dela.
+* é possível passar as variáveis de ambiente utilizadas pela aplicação para o container Docker.
+* é possível realizar o deploy de aplicações Java com Spring Boot em ambientes Cloud, como o Heroku.
+* cada provedor Cloud pode exigir diferentes configurações adicionais a serem realizadas na aplicação, para que ela seja executada sem nenhum tipo de problema.
