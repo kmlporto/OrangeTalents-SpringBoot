@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:alura-forum-test
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+    initialization-mode: never
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+

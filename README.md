@@ -129,3 +129,13 @@
 * existe a anotação @Profile serve para indicar ao Spring que determinada classe deve ser carregada apenas quando determinados profiles estiverem ativos;
 * é possível configurar o profile ativo da aplicação por meio do arquivo application.yml spring.profiles.active: dev;
 
+### Módulo 3 - Testes automatizados
+* é possível escrever testes automatizados de classes que são beans do Spring, como Controllers e Repositories.
+* é possível utilizar injeção de dependências nas classes de testes automatizados.
+* a anotação @SpringBootTest deve ser utilizada nas classes de testes automatizados para que o Spring inicialize o servidor e disponibilize os beans da aplicação.
+* ao testar uma interface Repository devemos, preferencialmente, utilizar a anotação @DataJpaTest.
+* por padrão, os testes automatizados dos repositories utilizam um banco de dados em memória, como o h2.
+* é possível utilizar outro banco de dados para os testes automatizados, utilizando a anotação @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE).
+* é possível forçar um profile específico para os testes automatizados com a utilização da anotação @ActiveProfiles.
+* para conseguir injetar o MockMvc devemos anotar a classe de teste com @AutoConfigureMockMvc.
+
