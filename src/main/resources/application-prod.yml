@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:alura-forum
+    url: ${FORUM_DATABASE_URL}
     driverClassName: org.h2.Driver
-    username: sa
-    password:
+    username: ${FORUM_DATABASE_USERNAME}
+    password: ${FORUM_DATABASE_PASSWORD}
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
@@ -19,7 +19,7 @@ spring:
 
 forum:
   jwt:
-    secret: lEAnEZSLi8qbVhnHe3Cixkq7Ty2wMs6VVu8pjPZsNfrymC5pwvxTFMQmaGIKXCwGXsV47ImKLB9W42bqoy7R8L49fAH233yOkiIhQVSqmPceHduTzrzy0tv6R2YKUlm4tVb7ERnOwnT2qdJOt8cjpvd7n2F5bSXsDXp5CBJZOsP3uoHLlHUA2YvdO17NHU58Fi38JCVmVyddMKOVfwk7iD8Ws5xZOsXhBQd8hYi0ml3XTHGY3QTckQWCLkqnAdtZ
+    secret: ${FORUM_JWT_SECRET}
     expiration: 86400000
 
 management:

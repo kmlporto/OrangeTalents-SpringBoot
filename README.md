@@ -139,3 +139,9 @@
 * é possível forçar um profile específico para os testes automatizados com a utilização da anotação @ActiveProfiles.
 * para conseguir injetar o MockMvc devemos anotar a classe de teste com @AutoConfigureMockMvc.
 
+### Módulo 4 - Deploy
+* para gerar o arquivo jar basta executar o comando maven: mvn clean package;
+* agora podemos executar a aplicação através do arquivo que foi gerado e se encontra dentro da pasta target;
+  * comando: java -jar forum-0.0.1-SNAPSHOT.jar
+* é possível passar parâmetros para as configurações da aplicação via variáveis de ambiente;
+* é possível alterar o build para criar um arquivo .wat, para deploy em servidores de aplicações;
